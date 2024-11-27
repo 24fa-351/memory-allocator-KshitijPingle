@@ -11,3 +11,9 @@ test:
 	# https://stackoverflow.com/questions/5553352/how-do-i-check-if-file-exists-in-makefile-so-i-can-delete-it
 
 	./mem_allocate
+
+test_my_malloc:
+	
+	gcc -o my_malloc my_malloc.c test_my_malloc.c
+
+	./my_malloc
