@@ -8,4 +8,5 @@
 
 
 # compile the program
-gcc -o mem_allocate mem_test.c
+# gcc -o mem_allocate mem_test.c
+gcc -o mem_allocate my_malloc.c test_my_malloc.c

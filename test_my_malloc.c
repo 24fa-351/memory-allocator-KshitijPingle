@@ -61,6 +61,8 @@ bool small_test() {
 }
 
 int main(int argc, char *argv[]) {
+    printf("Testing my_malloc\n");
+
     srand(time(NULL));
 
     bool result = false;

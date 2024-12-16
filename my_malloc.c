@@ -10,10 +10,15 @@
 
 #include "my_malloc.h"
 
+#define MAX_CHUNKS 128
+
+block_t heap[MAX_CHUNKS];
+size_t heap_count = 0;
+
 // Insert chunks the user does not need back into our heap
 void heap_insert(block_t* new_chunk) {
     if (heap_count < MAX_CHUNKS) {
-        my_heap[heap_count++] = *new_chunk;
+        heap[heap_count++] = *new_chunk;
     }
 }
 
@@ -26,8 +31,8 @@ void* malloc(size_t size) {
 
     // try to find a chunk that is the right size
     for (size_t i = 0; i < heap_count; i++) {
-        if (my_heap[i].size >= size) {
-            block_t* chunk = &my_heap[i];
+        if (heap[i].size >= size) {
+            block_t* chunk = &heap[i];
             block_t* leftover = split(chunk, size);
             if (leftover) {
                 heap_insert(leftover);
