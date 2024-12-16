@@ -14,6 +14,6 @@ test:
 
 test_my_malloc:
 	
-	gcc -o my_malloc my_malloc.c test_my_malloc.c
+	gcc -o mem_allocate my_malloc.c test_my_malloc.c
 
-	./my_malloc
+	./mem_allocate

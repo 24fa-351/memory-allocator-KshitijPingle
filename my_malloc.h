@@ -3,16 +3,22 @@
 
 #include <stdio.h>
 
+#define HEAP_SIZE 1024
+#define MAX_CHUNKS 128
+
 typedef struct block {
     size_t size;
     char* pointer_to_start;
 } block_t;
 
+block_t my_heap[MAX_CHUNKS];
+size_t heap_count = 0;
+
 void heap_insert(block_t* new_chunk);
 // * add a chunk back (on free)
 // `create the chunk_on_heap; heap_insert()`
 
-void* my_malloc(size_t size);
+void* malloc(size_t size);
 
 block_t* split(block_t* chunk, size_t size);
 // try to find this size or bigger;
@@ -23,7 +29,7 @@ block_t* split(block_t* chunk, size_t size);
 //      get more memory from system (sbrk)
 //      split that, add the rest to heap
 
-void my_free(void* ptr);
+void free(void* ptr);
 
 // USE array for now
 
@@ -35,8 +41,5 @@ void my_free(void* ptr);
 // sbrk()
 // ## sbrk()
 // * Ask linux for a HUGE chunk of memory
-
-
-
 
 #endif // MY_MALLOC_H

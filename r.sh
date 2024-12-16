@@ -8,4 +8,4 @@
 
 
 # compile the program
-gcc -o mem_allocate test.c
+gcc -o mem_allocate mem_test.c
