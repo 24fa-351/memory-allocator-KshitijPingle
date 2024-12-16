@@ -11,11 +11,13 @@
 
 #define NUM_OF_TESTS 5
 
-int rand_between(int min, int max) {
+int rand_between(int min, int max)
+{
     return min + rand() % (max - min + 1);
 }
 
-bool small_test() {
+bool small_test()
+{
 
     int num_of_tests = 5;
 
@@ -27,28 +29,30 @@ bool small_test() {
     char *ptrs[num_of_tests];
 
     // malloc here
-    for (int i = 0; i < num_of_tests; i++) {
+    for (int i = 0; i < num_of_tests; i++)
+    {
         int rand_size = rand_between(1, 63);
         fprintf(stderr, "[%d] size: %d\n", i, rand_size);
 
         ptrs[i] = malloc(rand_size);
-        if (ptrs[i] == NULL) {
+        if (ptrs[i] == NULL)
+        {
             fprintf(stderr, "Failed to allocate memory for ptrs[%d]\n", i);
             return false;
         }
 
-        int len_to_copy = (rand_size > strlen(test_string)) ? strlen(test_string) : rand_size;  // Give the min of the two
+        int len_to_copy = (rand_size > strlen(test_string)) ? strlen(test_string) : rand_size; // Give the min of the two
 
         fprintf(stderr, "[%d] len_to_copy: %d\n", i, len_to_copy);
         strncpy(ptrs[i], test_string, len_to_copy);
         ptrs[i][len_to_copy] = '\0';
 
         fprintf(stderr, "ptrs[%d]: %s\n", i, ptrs[i]);
-
     }
 
     // free here
-    for (int i = 0; i < num_of_tests; i++) {
+    for (int i = 0; i < num_of_tests; i++)
+    {
         fprintf(stderr, "Freeing ptrs[%d]\n", i);
         free(ptrs[i]);
         fprintf(stderr, "Freed ptrs[%d]\n", i);
@@ -58,32 +62,37 @@ bool small_test() {
     return true;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     srand(time(NULL));
 
     bool result = false;
 
-    if (argc > 1) {
-        if ((strcmp(argv[1], "-t") == 0) && (strcmp(argv[2], "num") == 0)) {
+    if (argc > 1)
+    {
+        if ((strcmp(argv[1], "-t") == 0) && (strcmp(argv[2], "num") == 0))
+        {
             // Execute only one random test
             int test_num = atoi(argv[3]);
 
-            switch (test_num) {
-                case 1:
-                    printf("Executing small_test()\n");
-                    result = small_test();
-                    printf("RESULT: %s\n", result ? "PASSED" : "FAILED");
-                    break;
-                default:
-                    printf("Executing small_test()\n");
-                    result = small_test();
-                    printf("RESULT: %s\n", result ? "PASSED" : "FAILED");
-                    break;
+            switch (test_num)
+            {
+            case 1:
+                printf("Executing small_test()\n");
+                result = small_test();
+                printf("RESULT: %s\n", result ? "PASSED" : "FAILED");
+                break;
+            default:
+                printf("Executing small_test()\n");
+                result = small_test();
+                printf("RESULT: %s\n", result ? "PASSED" : "FAILED");
+                break;
             }
 
             return 0;
         }
-        else {
+        else
+        {
             printf("Error: Invalid arguments\n");
             printf("Usage: %s -t num\n", argv[0]);
             return 1;
@@ -95,7 +104,6 @@ int main(int argc, char *argv[]) {
     printf("Executing small_test()\n");
     result = small_test();
     printf("RESULT: %s\n", result ? "PASSED" : "FAILED");
-
 
     return 0;
 }
